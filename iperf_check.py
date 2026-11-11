@@ -1,7 +1,8 @@
 import json
 import subprocess
-
-cmd = ["iperf3", "-c", "127.0.0.1", "-u", "-b", "50M", "-t", "3", "-J"]
+import sys
+rate = sys.argv[1] if len(sys.argv) > 1 else "50M"
+cmd = ["iperf3", "-c", "127.0.0.1", "-u", "-b", rate, "-t", "3", "-J"]
 result = subprocess.run(cmd, capture_output=True, text=True)
 
 data = json.loads(result.stdout)
